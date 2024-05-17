@@ -9,6 +9,7 @@
 ]
 ```
 > 其中`panelnum`参数为面板编号，即为你所收到注册邮件的`panel*.serv00.com`中的`*`数值。
+
 　　fork后我在后面随意添加了pushplus推送的代码，创建一个名为`TOKEN_JSON`的`Secret`，将 JSON 格式的账号密码字符串作为它的值
 ```
 [
