@@ -8,7 +8,8 @@ on:
 
 env:
   ACCOUNTS_JSON: ${{ secrets.ACCOUNTS_JSON }}
-
+  TOKEN_JSON: ${{ secrets.TOKEN_JSON }}
+  
 jobs:  
   login:  
     runs-on: ubuntu-latest  
@@ -27,6 +28,9 @@ jobs:
   
       - name: Create accounts.json  
         run: echo "$ACCOUNTS_JSON" > accounts.json  
+        
+      - name: Create token.json  
+        run: echo "$TOKEN_JSON" > token.json 
   
       - name: Login to website  
         run: |  
