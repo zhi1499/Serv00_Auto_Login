@@ -80,11 +80,11 @@ async function delayTime(ms) {
   // 读取 token.json 中的 JSON 字符串
   const tokenJson = fs.readFileSync('token.json', 'utf-8');
   const tokens = JSON.parse(tokenJson);
-  const { token  } = tokens;
+  const { token, usertoken  } = tokens;
   var pushplusToken = token;
   try {
       let result = axios.post("http://www.pushplus.plus/send",
-          JSON.stringify({"token": pushplusToken, "title": "serv00通知", "content": username}),
+          JSON.stringify({"token": pushplusToken, "title": "serv00通知", "content": usertoken}),
            {headers: {"Content-Type": "application/json"}}
       ).json()
       if (result.code == 200) {
