@@ -77,30 +77,37 @@ async function delayTime(ms) {
   }
 
   console.log('所有账号登录完成！');
+  
   // 读取 token.json 中的 JSON 字符串
   const tokenJson = fs.readFileSync('token.json', 'utf-8');
   const tokens = JSON.parse(tokenJson);
-  const { token, usertoken  } = tokens;
-  var data = JSON.stringify({
-     "token": token,
-     "title": "serv00登录",
-     "content": "用户" + usertoken,
-     "template": "json"
+  
+  for (const account of tokens) {
+    const { token, usertoken  } = account;
+    
+    var data = JSON.stringify({
+       "token": token,
+       "title": "serv00登录",
+       "content": "用户" + usertoken,
+       "template": "json"
+    });
+    
+    var config = {
+       method: 'post',
+       url: 'https://www.pushplus.plus/send',
+       headers: { 
+          'User-Agent': 'Apifox/1.0.0 (https://apifox.com)', 
+          'Content-Type': 'application/json'
+       },
+       data : data
+    };
+    
+    axios(config).then(function (response) {
+     console.log(JSON.stringify(response.data));
+  }).catch(function (error) {
+     console.log(error);
   });
-  var config = {
-     method: 'post',
-     url: 'https://www.pushplus.plus/send',
-     headers: { 
-        'User-Agent': 'Apifox/1.0.0 (https://apifox.com)', 
-        'Content-Type': 'application/json'
-     },
-     data : data
-  };
-  axios(config).then(function (response) {
-   console.log(JSON.stringify(response.data));
-}).catch(function (error) {
-   console.log(error);
-});   
+  }
 })();
 
 // 自定义延时函数
