@@ -76,7 +76,7 @@ async function delayTime(ms) {
   }
 
   console.log('所有账号登录完成！');
-  var pushplusToken = '9fb85ab052234158a82f90ce6156e304'
+  var pushplusToken = ''
         if (pushplusToken.length != 0) {
         try {
             let result = axios.post("http://www.pushplus.plus/send",
