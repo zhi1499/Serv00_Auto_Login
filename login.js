@@ -77,7 +77,11 @@ async function delayTime(ms) {
   }
 
   console.log('所有账号登录完成！');
-  var pushplusToken = ''
+  // 读取 token.json 中的 JSON 字符串
+  const tokenJson = fs.readFileSync('token.json', 'utf-8');
+  const tokens = JSON.parse(tokenJson);
+  const { token  } = tokens;
+  var pushplusToken = token;
         if (pushplusToken.length != 0) {
         try {
             let result = axios.post("http://www.pushplus.plus/send",
