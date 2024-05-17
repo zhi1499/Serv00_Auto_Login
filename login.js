@@ -82,21 +82,19 @@ async function delayTime(ms) {
   const tokens = JSON.parse(tokenJson);
   const { token  } = tokens;
   var pushplusToken = token;
-        if (pushplusToken.length != 0) {
-        try {
-            let result = axios.post("http://www.pushplus.plus/send",
-                JSON.stringify({"token": pushplusToken, "title": "serv00通知", "content": username}),
-                 {headers: {"Content-Type": "application/json"}}
-            ).json()
-            if (result.code == 200) {
-            console.log("pushplus推送成功")
-            } else {
-            console.log("推送消息异常")
-            }
-        } catch (error) {
-            console.log("推送消息失败" + error)
-        }
-        }
+  try {
+      let result = axios.post("http://www.pushplus.plus/send",
+          JSON.stringify({"token": pushplusToken, "title": "serv00通知", "content": username}),
+           {headers: {"Content-Type": "application/json"}}
+      ).json()
+      if (result.code == 200) {
+      console.log("pushplus推送成功")
+      } else {
+      console.log("推送消息异常")
+      }
+  } catch (error) {
+      console.log("推送消息失败" + error)
+  } 
 })();
 
 // 自定义延时函数
