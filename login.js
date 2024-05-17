@@ -81,34 +81,26 @@ async function delayTime(ms) {
   const tokenJson = fs.readFileSync('token.json', 'utf-8');
   const tokens = JSON.parse(tokenJson);
   const { token, usertoken  } = tokens;
-  var pushplusToken = token;
-  try {
-      var data = JSON.stringify({
-         "token": token,
-         "title": "serv00登录",
-         "content": "用户" + usertoken,
-         "template": "json"
-      });
-      
-      var config = {
-         method: 'post',
-         url: 'https://www.pushplus.plus/send',
-         headers: { 
-            'User-Agent': 'Apifox/1.0.0 (https://apifox.com)', 
-            'Content-Type': 'application/json'
-         },
-         data : data
-      };
-      
-      let result = axios(config)
-      if (result.code == 200) {
-      console.log("pushplus推送成功")
-      } else {
-      console.log("推送消息异常")
-      }
-  } catch (error) {
-      console.log("推送消息失败" + error)
-  } 
+  var data = JSON.stringify({
+     "token": token,
+     "title": "serv00登录",
+     "content": "用户" + usertoken,
+     "template": "json"
+  });
+  var config = {
+     method: 'post',
+     url: 'https://www.pushplus.plus/send',
+     headers: { 
+        'User-Agent': 'Apifox/1.0.0 (https://apifox.com)', 
+        'Content-Type': 'application/json'
+     },
+     data : data
+  };
+  axios(config).then(function (response) {
+   console.log(JSON.stringify(response.data));
+}).catch(function (error) {
+   console.log(error);
+});   
 })();
 
 // 自定义延时函数
